@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "RunnersList";
+}
+@model IEnumerable<Runners.Models.Pace>
+    @{ 
+        Layout = null;
+    }
+<form class="text-center" method="get">
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">Username</th>
+                <th class="text-center">Old</th>
+                <th class="text-center">Gender</th>
+                <th class="text-center">@Html.ActionLink("Total Time", "Index", new { sortOrder = ViewBag.TotalTimeSortParm })</th>
+                <th class="text-center">@Html.ActionLink("Distance", "Index", new { sortOrder = ViewBag.DistanceSortParm })</th>
+                <th class="text-center">@Html.ActionLink("AverageSpeed", "Index", new { sortOrder = ViewBag.AverageSortParm })</th>
+                <th>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Dropdown Example
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Group 1 (20-30) Age", "Index", new { AgeOrder = ViewBag.Age1SortParm })</li>
+                            <li>@Html.ActionLink("Group 2 (30-40) Age", "Index", new { AgeOrder = ViewBag.Age2SortParm })</li>
+                            <li>@Html.ActionLink("Group 3 (40-60) Age", "Index", new { AgeOrder = ViewBag.Age3SortParm })</li>
+                        </ul>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Runners.Models.Pace pace in Model)
+            {
+
+                <tr>
+                    <td>@pace.Users.Username</td>
+                    <td>@pace.Users.Age</td>
+                    <td>
+                        @if (pace.Users.Gender == true)
+                        {
+                            <label>Female</label>
+                        }
+                        else
+                        {
+                            <label>Male</label>
+                        }
+                    </td>
+                    <td>@pace.Total_Time</td>
+                    <td>@pace.Distance</td>
+                    <td>@pace.Average_Speed</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
